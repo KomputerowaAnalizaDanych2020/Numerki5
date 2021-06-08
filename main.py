@@ -94,6 +94,19 @@ def MSE(tab, tablica, number_of_points):
     return output
 
 
+def blad(wezly, ak, choice, wsp, ilosc_wezlow, stopien_wielomianu):
+    result = 0
+    w = []
+    for i in range(ilosc_wezlow):
+        w.insert(i, 0)
+    for j in range(ilosc_wezlow):
+        for i in range(stopien_wielomianu):
+            w[i] += wsp[i] * laguerre(i, wezly[j])
+    for i in range(ilosc_wezlow):
+        result += ak[i] * (wartosci(wezly[i], choice) - w[i])*(wartosci(wezly[i], choice) - w[i])
+    return np.sqrt(result)
+
+
 print("Wybierz jedną z funkcji:")
 print("1. 10x - 2 ")
 print("2. 2x^4 + x^3 + 5x^2 - 4x - 20 ")
@@ -137,9 +150,10 @@ tablicay_a1 = np.array([],float)                                   #wartosci apr
 for i in range(len(tablicax)):
     tablicay_a1 = np.append(tablicay_a1, tablicay_a[i])
 
-
+error1 = blad(nodes, ak, choice, wsp, ilosc_wezlow, stopien)
 error = MSE(tablicay, tablicay_a1, len(tablicax))
 print(error)
+print(error1)
 
 plt.plot(tablicax, tablicay, 'g', tablicax, tablicay_a1, 'r-')
 plt.xlabel('x')
