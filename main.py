@@ -144,5 +144,6 @@ print(error)
 plt.plot(tablicax, tablicay, 'g', tablicax, tablicay_a1, 'r-')
 plt.xlabel('x')
 plt.ylabel('y')
+plt.title('Zadanie 5')
 plt.show()
 
